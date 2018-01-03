@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements
     private static String LOG_TAG = MainActivity.class.getSimpleName();
     private static final int LOADER_ID_MESSAGES = 0;
 
+    private static final String KEY_TEST = "test";
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     RecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
     SquawkAdapter mAdapter;
@@ -86,6 +89,14 @@ public class MainActivity extends AppCompatActivity implements
         // Start the loader
         getSupportLoaderManager().initLoader(LOADER_ID_MESSAGES, null, this);
 
+        /**
+         * get bundle sent from fcm
+         * to determine app is being opened by the push notification from fcm or not
+         */
+        Bundle bundle = getIntent().getExtras();
+        if (null != bundle && bundle.containsKey(KEY_TEST)){
+            Log.d(TAG, "value : " + bundle.getString(KEY_TEST));
+        }
     }
 
     @Override
